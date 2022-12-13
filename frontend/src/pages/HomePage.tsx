@@ -3,9 +3,11 @@ import {Avatar, Box, Button, Container, FormControl, Menu, MenuItem, TextField, 
 import {useNavigate} from "react-router-dom";
 import {useTranslation} from "react-i18next";
 import PopupState, {bindMenu, bindTrigger} from 'material-ui-popup-state';
+import {confirmAlert} from "react-confirm-alert";
 import icon_en from "../assets/Icon_en.png";
 import icon_pl from "../assets/Icon_pl.png";
 import icon_de from "../assets/Icon_de.png";
+import '../styles/alert.css';
 
 const HomePage = () => {
 
@@ -13,16 +15,61 @@ const HomePage = () => {
     const {t, i18n} = useTranslation();
 
     const [check, setCheck] = useState<number>(0);
-    const [repo, setRepo] = useState<string>("");
-    const [username, setUsername] = useState<string>("");
+    const [repo, setRepo] = useState<string>();
+    const [username, setUsername] = useState<string>();
 
     const updateRepo = (e: any) => setRepo(e.target.value);
     const updateUsername = (e: any) => setUsername(e.target.value);
 
     function onReset() {
         setCheck(0);
-        setUsername("");
-        setRepo("")
+        setUsername(undefined);
+        setRepo(undefined);
+    }
+
+    function handleRepoSubmit() {
+        if (repo == null) {
+            confirmAlert(
+                {
+                    title: t("repository_name_must_be_set").toString(),
+                    buttons: [
+                        {
+                            label: "ok"
+                        }
+                    ]
+                }
+            );
+        } else if (username == null) {
+            confirmAlert(
+                {
+                    title: t("username_must_be_set").toString(),
+                    buttons: [
+                        {
+                            label: "ok"
+                        }
+                    ]
+                }
+            );
+        } else if (repo != null && username != null){
+            navigate("/repository/" + username + "/" + repo);
+        }
+    }
+
+    function handleUsernameSubmit() {
+        if (username == null) {
+            confirmAlert(
+                {
+                    title: t("username_must_be_set").toString(),
+                    buttons: [
+                        {
+                            label: "ok"
+                        }
+                    ]
+                }
+            );
+        } else {
+            navigate("/username/" + username);
+        }
     }
 
     return (
@@ -98,6 +145,13 @@ const HomePage = () => {
                     />}
                     {check === 2 && <TextField
                         type={"text"}
+                        placeholder={t("owner_name").toString()}
+                        value={username}
+                        onChange={updateUsername}
+                        sx={{m: 2}}
+                    />}
+                    {check === 2 && <TextField
+                        type={"text"}
                         placeholder={t("repo").toString()}
                         value={repo}
                         onChange={updateRepo}
@@ -107,7 +161,7 @@ const HomePage = () => {
                         <Button
                             sx={{m: 2}}
                             variant="contained"
-                            onClick={() => navigate("/username/"+username)}
+                            onClick={() => handleUsernameSubmit()}
                         >
                             {t("find")}
                         </Button>
@@ -116,7 +170,7 @@ const HomePage = () => {
                         <Button
                             sx={{m: 2}}
                             variant="contained"
-                            onClick={() => navigate("/repository/"+repo)}
+                            onClick={() => handleRepoSubmit()}
                         >
                             {t("find")}
                         </Button>

@@ -21,7 +21,7 @@ function App() {
             <Routes>
                 <Route path={"/"} element={<HomePage/>}/>
                 <Route path={"/username/:username"} element={<UsernameComponent/>}/>
-                <Route path={"/repository/:repo"} element={<RepositoryComponent/>}/>
+                <Route path={"/repository/:username/:repo"} element={<RepositoryComponent/>}/>
             </Routes>
         </ThemeProvider>
     );

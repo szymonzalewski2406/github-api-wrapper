@@ -1,7 +1,11 @@
 {
   "username": "Username",
+  "owner_name": "Owner username",
   "repo": "Repository",
   "language": "Language",
   "find": "Find",
-  "reset": "Reset"
+  "reset": "Reset",
+  "are_you_sure": "Are you sure?",
+  "username_must_be_set": "Username must be set!",
+  "repository_name_must_be_set": "Repository name must be set!"
 }

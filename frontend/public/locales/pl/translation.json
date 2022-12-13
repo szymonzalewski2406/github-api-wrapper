@@ -1,7 +1,11 @@
 {
   "username": "Nazwa użytkownika",
+  "owner_name": "Nick właściciela",
   "repo": "Repozytorium",
   "language": "Język",
   "find": "Szukaj",
-  "reset": "Resetuj"
+  "reset": "Resetuj",
+  "are_you_sure": "Na pewno?",
+  "username_must_be_set": "Proszę uzupełnić nazwę użytkownika!",
+  "repository_name_must_be_set": "Proszę uzupełnić nazwę repozytorium!"
 }

@@ -1,7 +1,11 @@
 {
   "username": "Benutzername",
+  "owner_name": "Benutzername den Inhaber",
   "repo": "Repository",
   "language": "Sprache",
   "find": "Suchen",
-  "reset": "Reset"
+  "reset": "Reset",
+  "are_you_sure": "Bist du sicher?",
+  "username_must_be_set": "Benutzername musst gefühlt sein!",
+  "repository_name_must_be_set": "Repositoryname musst gefühlt sein!"
 }
