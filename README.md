@@ -1,7 +1,7 @@
-# github-api-wrapper
+# Github api wrapper
 with this github api wrapper you can:
  
- get information about repository:
+ # get information about repository:
   -name
   -description
   -creation and update date
@@ -14,7 +14,7 @@ with this github api wrapper you can:
     -issue url
     -is open/closed
   
-  or get information about user:
+  # or get information about user:
    -account creation date
    -account update date
    -amount of public repositories
