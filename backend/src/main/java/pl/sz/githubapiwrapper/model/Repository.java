@@ -1,4 +1,4 @@
-package model;
+package pl.sz.githubapiwrapper.model;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,8 +13,8 @@ import java.util.List;
 public class Repository {
     private String name;
     private String description;
-    private Date created;
-    private Date updated;
+    private Date created_at;
+    private Date updated_at;
     private User owner;
     private List<Issue> issues;
 }

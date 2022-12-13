@@ -1,8 +1,11 @@
+package pl.sz.githubapiwrapper;
+
 import com.google.gson.Gson;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import model.User;
-import org.springframework.http.ResponseEntity;
+import pl.sz.githubapiwrapper.model.Issue;
+import pl.sz.githubapiwrapper.model.Repository;
+import pl.sz.githubapiwrapper.model.User;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -68,13 +71,16 @@ public class ApiService {
         return new Gson().fromJson(data, User.class);
     }
 
-//    public List<Issue> getIssues(String username, String repositoryName) {
-//        List<String> data = getJSON("https://api.github.com/repos/" + username + "/" + repositoryName + "/issues");
+//    public Issue getIssues(String username, String repositoryName) {
+//        String data = getJSON("https://api.github.com/repos/" + username + "/" + repositoryName + "/issues");
 //        return new Gson().fromJson(data, Issue.class);
 //    }
-//
-//    public Repository getRepo(String username, String repositoryName) {
-//        String data = getJSON("https://api.github.com/repos/" + username + "/" + repositoryName);
-//        return new Gson().fromJson(data, Repository.class);
-//    }
+    public Repository getRepo(String username, String repositoryName) {
+        String data = getJSON("https://api.github.com/repos/" + username + "/" + repositoryName);
+        Repository repo = new Gson().fromJson(data, Repository.class);
+        repo.setOwner(getUser(username));
+        return repo;
+    }
 }
+
+//TODO issues jako lista

@@ -1,4 +1,4 @@
-package model;
+package pl.sz.githubapiwrapper.model;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,14 +13,14 @@ import java.util.Date;
 public class User {
     @Id
     private Long id;
-    private String username;
-    private String avatarUrl;
-    private String url;
+    private String login;
+    private String avatar_url;
+    private String html_url;
     private String type;
     private String name;
     private String location;
-    private Integer publicRepos;
+    private Integer public_repos;
     private Integer followers;
-    private Date created;
-    private Date updated;
+    private Date created_at;
+    private Date updated_at;
 }

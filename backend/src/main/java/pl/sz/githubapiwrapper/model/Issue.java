@@ -1,4 +1,4 @@
-package model;
+package pl.sz.githubapiwrapper.model;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,5 +13,5 @@ public class Issue {
     private Long id;
     private String title;
     private String state;
-    private String url;
+    private String html_url;
 }
