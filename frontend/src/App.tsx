@@ -1,26 +1,29 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import {createTheme, ThemeProvider} from "@mui/material";
+import {Route, Routes} from "react-router-dom";
+import HomePage from "./pages/HomePage";
+import UsernameComponent from "./components/UsernameComponent";
+import RepositoryComponent from "./components/RepositoryComponent";
 
+const theme = createTheme({
+    palette: {
+        primary: {
+            main: '#718294',
+            light: '#ffffff',
+            dark: '#000000',
+        },
+    },
+})
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    return (
+        <ThemeProvider theme={theme}>
+            <Routes>
+                <Route path={"/"} element={<HomePage/>}/>
+                <Route path={"/username/:username"} element={<UsernameComponent/>}/>
+                <Route path={"/repository/:repo"} element={<RepositoryComponent/>}/>
+            </Routes>
+        </ThemeProvider>
+    );
 }
-
 export default App;
