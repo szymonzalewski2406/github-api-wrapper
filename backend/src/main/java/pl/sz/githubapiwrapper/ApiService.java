@@ -33,10 +33,30 @@ public class ApiService {
             c.setRequestProperty("Content-length", "0");
             c.setUseCaches(false);
             c.setAllowUserInteraction(false);
+            c.setRequestProperty("Authorization","Bearer " + " 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");
             c.connect();
             int status = c.getResponseCode();
+            String statusMsg = "";
+            if(status == 200 || status == 201){
+                statusMsg = "OK";
+            }
+            else if(status == 401){
+                statusMsg = "Unauthorized";
+            }
+            else if(status == 403){
+                statusMsg = "Forbidden";
+            }
+            else if(status == 404){
+                statusMsg = "Not found";
+            }
+            else if(status == 500){
+                statusMsg = "Server error";
+            }
+            else{
+                statusMsg = "Other";
+            }
             log.info("Github url: " + url);
-            log.info("Status code: " + status);
+            log.info("Status code: " + status + " - " + statusMsg);
             log.info("Timestamp: " + new Date());
 
             switch (status) {

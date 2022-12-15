@@ -5,14 +5,16 @@ import {useTranslation} from "react-i18next";
 import {User} from "../model/User";
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import {PublicRepos} from "../model/PublicRepos";
+import ReactLoading from 'react-loading';
 
 const UsernameComponent = () => {
 
     const navigate = useNavigate();
-    const {t, i18n} = useTranslation();
+    const {t} = useTranslation();
     const {username} = useParams();
 
     const [user, setUser] = useState<User>();
+    const [status, setStatus] = useState<number>();
     const [repos, setRepos] = useState<{ label: string, id: number }[]>([]);
 
     useEffect(() => {
@@ -24,6 +26,7 @@ const UsernameComponent = () => {
         })
             .then(res => {
                 if (res.ok) {
+                    setStatus(res.status);
                     return res.json();
                 } else {
                     alert("Błąd: " + res.statusText)
@@ -39,7 +42,7 @@ const UsernameComponent = () => {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json; charset=utf-8',
-                'Authorization': 'Bearer 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'
+                'Authorization': 'Bearer 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'
             },
         })
             .then(res => {
@@ -61,7 +64,7 @@ const UsernameComponent = () => {
 
     return (
         <Container>
-            {user !== undefined && <div>
+            {(user !== undefined && status === 200) && <div>
             <h1>{t("user") + ": " + user?.login + ", id: " + user?.id}</h1>
             <a href={user?.html_url}>{t("github_profile")} </a>
             <Divider/>
@@ -97,18 +100,29 @@ const UsernameComponent = () => {
                     />
                 </Grid>
             </Grid>
+                <Button
+                    sx={{m:2}}
+                    variant="contained"
+                    onClick={() => navigate(-1)}
+                >
+                    {t("back")}
+                </Button>
             </div>}
-            {user === undefined &&
+            {(user === undefined && status === 404) &&
                 <div>
                     <h1>{t("user_not_found")}</h1>
+                    <Button
+                        sx={{m:2}}
+                        variant="contained"
+                        onClick={() => navigate(-1)}
+                    >
+                        {t("back")}
+                    </Button>
                 </div>}
-            <Button
-                sx={{m:2}}
-                variant="contained"
-                onClick={() => navigate(-1)}
-            >
-                {t("back")}
-            </Button>
+            {(user === undefined && status === 200) &&
+                <div>
+                    <ReactLoading type={"spin"} color={"#718294"} height={'20%'} width={'20%'}/>
+                </div>}
         </Container>
     );
 }
