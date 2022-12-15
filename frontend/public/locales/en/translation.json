@@ -1,11 +1,24 @@
 {
   "username": "Username",
   "owner_name": "Owner username",
+  "user": "User",
+  "name_and_surname": "Name and surname",
+  "type": "Type",
+  "location": "Location",
+  "public_repos": "Amount of public repositories",
+  "followers": "Amount of followers",
+  "created_at": "Created at",
+  "updated_at": "Updated at",
+  "user_repos": "User's public repositories",
   "repo": "Repository",
   "language": "Language",
   "find": "Find",
+  "find_owner_repos": "Find owner's public repositories",
   "reset": "Reset",
   "are_you_sure": "Are you sure?",
   "username_must_be_set": "Username must be set!",
-  "repository_name_must_be_set": "Repository name must be set!"
+  "repository_name_must_be_set": "Repository name must be set!",
+  "back": "Back",
+  "github_profile": "Github profile",
+  "user_not_found": "User with this username not found."
 }

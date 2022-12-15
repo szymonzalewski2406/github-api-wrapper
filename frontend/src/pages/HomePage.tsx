@@ -1,5 +1,16 @@
 import React, {useState} from "react";
-import {Avatar, Box, Button, Container, FormControl, Menu, MenuItem, TextField, Typography} from "@mui/material";
+import {
+    Autocomplete,
+    Avatar,
+    Box,
+    Button,
+    Container,
+    FormControl,
+    Menu,
+    MenuItem,
+    TextField,
+    Typography
+} from "@mui/material";
 import {useNavigate} from "react-router-dom";
 import {useTranslation} from "react-i18next";
 import PopupState, {bindMenu, bindTrigger} from 'material-ui-popup-state';
@@ -8,6 +19,7 @@ import icon_en from "../assets/Icon_en.png";
 import icon_pl from "../assets/Icon_pl.png";
 import icon_de from "../assets/Icon_de.png";
 import '../styles/alert.css';
+import {PublicRepos} from "../model/PublicRepos";
 
 const HomePage = () => {
 
@@ -15,16 +27,56 @@ const HomePage = () => {
     const {t, i18n} = useTranslation();
 
     const [check, setCheck] = useState<number>(0);
+    const [isRepoDownloaded, setIsRepoDownloaded] = useState<boolean>(false);
     const [repo, setRepo] = useState<string>();
     const [username, setUsername] = useState<string>();
-
-    const updateRepo = (e: any) => setRepo(e.target.value);
+    const [repos, setRepos] = useState<{ label: string, id: number }[]>([]);
     const updateUsername = (e: any) => setUsername(e.target.value);
+
+    function getAllPublicRepos() {
+        if (username == null) {
+            confirmAlert(
+                {
+                    title: t("username_must_be_set").toString(),
+                    buttons: [
+                        {
+                            label: "ok"
+                        }
+                    ]
+                }
+            );
+        } else {
+            fetch('https://api.github.com/users/' + username + '/repos', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json; charset=utf-8',
+                    'Authorization': 'Bearer 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'
+                },
+            })
+                .then(res => {
+                    if (res.ok) {
+                        return res.json();
+                    } else {
+                        alert("Error: " + res.statusText)
+                    }
+                })
+                .then((data: PublicRepos[]) => {
+                    setRepos(data.map(t => {
+                        return {
+                            label: t.name,
+                            id: t.id
+                        } as { label: string, id: number }
+                    }))
+                });
+            setIsRepoDownloaded(true);
+        }
+    }
 
     function onReset() {
         setCheck(0);
         setUsername(undefined);
         setRepo(undefined);
+        setIsRepoDownloaded(false);
     }
 
     function handleRepoSubmit() {
@@ -39,18 +91,7 @@ const HomePage = () => {
                     ]
                 }
             );
-        } else if (username == null) {
-            confirmAlert(
-                {
-                    title: t("username_must_be_set").toString(),
-                    buttons: [
-                        {
-                            label: "ok"
-                        }
-                    ]
-                }
-            );
-        } else if (repo != null && username != null){
+        } else {
             navigate("/repository/" + username + "/" + repo);
         }
     }
@@ -150,13 +191,25 @@ const HomePage = () => {
                         onChange={updateUsername}
                         sx={{m: 2}}
                     />}
-                    {check === 2 && <TextField
-                        type={"text"}
-                        placeholder={t("repo").toString()}
-                        value={repo}
-                        onChange={updateRepo}
-                        sx={{m: 2}}
-                    />}
+                    {check === 2 &&
+                        <Button
+                            sx={{m: 2}}
+                            variant="contained"
+                            onClick={() => getAllPublicRepos()}
+                        >
+                            {t("find_owner_repos")}
+                        </Button>
+                    }
+                    {isRepoDownloaded && <div>
+                        <Autocomplete
+                            disablePortal
+                            id="combo-box-demo"
+                            options={repos}
+                            onChange={(_, v) => setRepo(v?.label)}
+                            sx={{m: 2, width: 300}}
+                            renderInput={(params) => <TextField {...params} label={t("repo")}/>}
+                        />
+                    </div>}
                     {check === 1 &&
                         <Button
                             sx={{m: 2}}
@@ -166,7 +219,7 @@ const HomePage = () => {
                             {t("find")}
                         </Button>
                     }
-                    {check === 2 &&
+                    {(check === 2 && isRepoDownloaded) &&
                         <Button
                             sx={{m: 2}}
                             variant="contained"

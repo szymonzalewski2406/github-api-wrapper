@@ -1,11 +1,24 @@
 {
   "username": "Nazwa użytkownika",
   "owner_name": "Nick właściciela",
+  "user": "Użytkownik",
+  "name_and_surname": "Imię i nazwisko",
+  "type": "Typ",
+  "location": "Lokalizacja",
+  "public_repos": "Ilość publicznych repozytoriów",
+  "followers": "Ilość osób obserwujących",
+  "created_at": "Utworzono",
+  "updated_at": "Zaktualizowano",
+  "user_repos": "Publiczne repozytoria użytkownika",
   "repo": "Repozytorium",
   "language": "Język",
   "find": "Szukaj",
+  "find_owner_repos": "Szukaj publicznych repozytoriów właściciela",
   "reset": "Resetuj",
   "are_you_sure": "Na pewno?",
   "username_must_be_set": "Proszę uzupełnić nazwę użytkownika!",
-  "repository_name_must_be_set": "Proszę uzupełnić nazwę repozytorium!"
+  "repository_name_must_be_set": "Proszę uzupełnić nazwę repozytorium!",
+  "back": "Wstecz",
+  "github_profile": "Profil na Githubie",
+  "user_not_found": "Nie znaleziono użytkownika o takiej nazwie."
 }
