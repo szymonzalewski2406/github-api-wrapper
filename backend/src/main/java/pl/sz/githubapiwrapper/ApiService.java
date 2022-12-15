@@ -3,11 +3,14 @@ package pl.sz.githubapiwrapper;
 import com.google.gson.Gson;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.*;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.client.RestTemplate;
 import pl.sz.githubapiwrapper.model.Issue;
 import pl.sz.githubapiwrapper.model.Repository;
 import pl.sz.githubapiwrapper.model.User;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -15,6 +18,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Date;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -23,6 +27,29 @@ import java.util.logging.Logger;
 @Transactional
 @RequiredArgsConstructor
 public class ApiService {
+
+    public String getStatusMsg(Integer status){
+        String statusMsg = "";
+        if(status == 200 || status == 201){
+            statusMsg = "OK - Have a lot of fun :)";
+        }
+        else if(status == 401){
+            statusMsg = "Unauthorized - Please check if your private access token is valid!";
+        }
+        else if(status == 403){
+            statusMsg = "Forbidden - Please check if your private access token is correctly passed!";
+        }
+        else if(status == 404){
+            statusMsg = "Not found";
+        }
+        else if(status == 500){
+            statusMsg = "Server error - Something doesn't work.";
+        }
+        else{
+            statusMsg = "Other";
+        }
+        return statusMsg;
+    }
 
     public String getJSON(String url) {
         HttpURLConnection c = null;
@@ -33,30 +60,11 @@ public class ApiService {
             c.setRequestProperty("Content-length", "0");
             c.setUseCaches(false);
             c.setAllowUserInteraction(false);
-            c.setRequestProperty("Authorization","Bearer " + " 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");
+            c.setRequestProperty("Authorization","Bearer " + " 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");
             c.connect();
             int status = c.getResponseCode();
-            String statusMsg = "";
-            if(status == 200 || status == 201){
-                statusMsg = "OK";
-            }
-            else if(status == 401){
-                statusMsg = "Unauthorized";
-            }
-            else if(status == 403){
-                statusMsg = "Forbidden";
-            }
-            else if(status == 404){
-                statusMsg = "Not found";
-            }
-            else if(status == 500){
-                statusMsg = "Server error";
-            }
-            else{
-                statusMsg = "Other";
-            }
             log.info("Github url: " + url);
-            log.info("Status code: " + status + " - " + statusMsg);
+            log.info("Status code: " + status + " - " + getStatusMsg(status));
             log.info("Timestamp: " + new Date());
 
             switch (status) {
@@ -86,21 +94,34 @@ public class ApiService {
         return null;
     }
 
-    public User getUser(String username) {
+    public User findUser(String username) {
         String data = getJSON("https://api.github.com/users/" + username);
         return new Gson().fromJson(data, User.class);
     }
 
-//    public Issue getIssues(String username, String repositoryName) {
-//        String data = getJSON("https://api.github.com/repos/" + username + "/" + repositoryName + "/issues");
-//        return new Gson().fromJson(data, Issue.class);
-//    }
-    public Repository getRepo(String username, String repositoryName) {
+    public List<Issue> findIssues(String username, String repositoryName) {
+        String url = "https://api.github.com/repos/" + username + "/" + repositoryName + "/issues";
+        RestTemplate restTemplate = new RestTemplate();
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Authorization","Bearer " + " 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");
+        HttpEntity<Void> requestEntity = new HttpEntity<>(headers);
+        ResponseEntity<List<Issue>> responseEntity =
+                restTemplate.exchange(
+                        url,
+                        HttpMethod.GET,
+                        requestEntity,
+                        new ParameterizedTypeReference<List<Issue>>() {}
+                );
+        log.info("Github url: " + url);
+        log.info("Status code: " + responseEntity.getStatusCode().value() + " - " + getStatusMsg(responseEntity.getStatusCode().value()));
+        log.info("Timestamp: " + new Date());
+        return responseEntity.getBody();
+    }
+    public Repository findRepo(String username, String repositoryName) {
         String data = getJSON("https://api.github.com/repos/" + username + "/" + repositoryName);
         Repository repo = new Gson().fromJson(data, Repository.class);
-        repo.setOwner(getUser(username));
+        repo.setOwner(findUser(username));
+        repo.setIssues(findIssues(username, repositoryName));
         return repo;
     }
 }
-
-//TODO issues jako lista

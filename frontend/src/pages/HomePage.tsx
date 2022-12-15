@@ -50,7 +50,7 @@ const HomePage = () => {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json; charset=utf-8',
-                    'Authorization': 'Bearer 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'
+                    'Authorization': 'Bearer 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'
                 },
             })
                 .then(res => {

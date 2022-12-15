@@ -1,7 +1,7 @@
 {
   "username": "Benutzername",
   "owner_name": "Benutzername den Inhaber",
-  "User": "Benutzer",
+  "user": "Benutzer",
   "name_and_surname": "Name und Nachname",
   "type": "Typ",
   "location": "Ort",
@@ -10,6 +10,8 @@
   "Erstellt": "Created at",
   "Aktualisiert": "Updated at",
   "user_repos": "Public Repositories des Benutzers",
+  "created_at": "Erstellt",
+  "updated_at": "Aktualisiert",
   "repo": "Repository",
   "language": "Sprache",
   "find": "Suchen",
@@ -19,6 +21,13 @@
   "username_must_be_set": "Benutzername musst gefühlt sein!",
   "repository_name_must_be_set": "Repositoryname musst gefühlt sein!",
   "back": "Zurück",
-  "github_profile": "Github Profil",
-  "user_not_found": "Benutzer mit diesem Name nicht gefunden."
+  "github_view": "Sieh auf Github",
+  "user_not_found": "Benutzer mit diesem Name nicht gefunden.",
+  "repo_not_found": "Repository mit diesem Name nicht gefunden.",
+  "clone": "clone Repository",
+  "description": "Bezeichnung",
+  "cancel": "Abbrechen",
+  "owner": "Repository Inhaber",
+  "watchers": "Anhänger",
+  "no_issues": "Dieses Repository hat keine geöfnete Issues"
 }

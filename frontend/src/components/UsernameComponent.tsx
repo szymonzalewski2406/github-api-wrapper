@@ -35,14 +35,14 @@ const UsernameComponent = () => {
             .then(data => {
                 setUser(data);
             });
-    }, []);
+    }, [username]);
 
     useEffect(() => {
         fetch('https://api.github.com/users/' + username + '/repos', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json; charset=utf-8',
-                'Authorization': 'Bearer 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'
+                'Authorization': 'Bearer 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'
             },
         })
             .then(res => {
@@ -60,13 +60,13 @@ const UsernameComponent = () => {
                     } as { label: string, id: number }
                 }))
             });
-    }, []);
+    }, [username]);
 
     return (
         <Container>
             {(user !== undefined && status === 200) && <div>
             <h1>{t("user") + ": " + user?.login + ", id: " + user?.id}</h1>
-            <a href={user?.html_url}>{t("github_profile")} </a>
+            <a href={user?.html_url}>{t("github_view")} </a>
             <Divider/>
             <Grid container spacing={2}>
                 <Grid item xs={12} md={4}>
@@ -88,8 +88,8 @@ const UsernameComponent = () => {
                         src={user?.avatar_url}
                         sx={{width: 150, height: 150}}
                     />
-                    {user != undefined ? <p>{t("created_at") + ": " + new Date(user.created_at).toLocaleDateString()}</p> : ""}
-                    {user != undefined ? <p>{t("updated_at") + ": " + new Date(user.updated_at).toLocaleDateString()}</p> : ""}
+                    {user !== undefined ? <p>{t("created_at") + ": " + new Date(user.created_at).toLocaleDateString()}</p> : ""}
+                    {user !== undefined ? <p>{t("updated_at") + ": " + new Date(user.updated_at).toLocaleDateString()}</p> : ""}
                     <Autocomplete
                         disablePortal
                         id="combo-box-demo"

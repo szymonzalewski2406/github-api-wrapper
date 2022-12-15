@@ -19,6 +19,13 @@
   "username_must_be_set": "Proszę uzupełnić nazwę użytkownika!",
   "repository_name_must_be_set": "Proszę uzupełnić nazwę repozytorium!",
   "back": "Wstecz",
-  "github_profile": "Profil na Githubie",
-  "user_not_found": "Nie znaleziono użytkownika o takiej nazwie."
+  "github_view": "Zobacz na Github",
+  "user_not_found": "Nie znaleziono użytkownika o takiej nazwie.",
+  "repo_not_found": "Nie znaleziono repozytorium o takiej nazwie.",
+  "clone": "Klonuj repozytorium",
+  "description": "Opis",
+  "cancel": "Anuluj",
+  "owner": "Właściciel repozytorium",
+  "watchers": "Obserwujący",
+  "no_issues": "To repozytorium nie posiada otwartych issues'ów"
 }

@@ -14,4 +14,7 @@ public class Issue {
     private String title;
     private String state;
     private String html_url;
+
+    public Issue(Issue issue) {
+    }
 }

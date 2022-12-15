@@ -19,6 +19,13 @@
   "username_must_be_set": "Username must be set!",
   "repository_name_must_be_set": "Repository name must be set!",
   "back": "Back",
-  "github_profile": "Github profile",
-  "user_not_found": "User with this username not found."
+  "github_view": "View on Github",
+  "user_not_found": "User with this username not found.",
+  "repo_not_found": "Repository not found.",
+  "clone": "Clone repository",
+  "description": "Description",
+  "cancel": "Cancel",
+  "owner": "Repository owner",
+  "watchers": "Watchers",
+  "no_issues": "This repository has no open issues"
 }
