@@ -34,3 +34,7 @@
    -amount of public repositories
    
    -amount of followers
+   
+   
+   important note: you need to generate your own personal access token and paste it instead of mine.
+   https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token
