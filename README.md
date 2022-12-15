@@ -1,27 +1,28 @@
 # Github api wrapper
  
  # get information about repository:
+ 
   -name
   
   -description
   
   -creation and update date
   
-  -owner id
+  -owner
   
   -is owner organisation or user
   
-  -owner avatar url
+  -owner avatar
   
-  -project issues with:
+# project issues with:
   
-    -title
+   -title
     
-    -id
+   -id
     
-    -issue url
+   -issue url
     
-    -is open/closed
+   -is open/closed
   
   
   # or get information about user:
@@ -33,3 +34,7 @@
    -amount of public repositories
    
    -amount of followers
+   
+   
+   important note: you need to generate your own personal access token and paste it instead of mine.
+   https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token
