@@ -27,5 +27,9 @@
   "cancel": "Cancel",
   "owner": "Repository owner",
   "watchers": "Watchers",
-  "no_issues": "This repository has no open issues"
+  "no_issues": "This repository has no open issues",
+  "title": "Title",
+  "state": "State",
+  "paste_token": "Make sure that your Personal Access Token is correctly pasted into code and that is valid!",
+  "learn_more": "Learn more about Personal Access Token"
 }

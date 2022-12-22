@@ -28,6 +28,7 @@ import java.util.logging.Logger;
 @RequiredArgsConstructor
 public class ApiService {
 
+
     public String getStatusMsg(Integer status){
         String statusMsg = "";
         if(status == 200 || status == 201){
@@ -60,7 +61,7 @@ public class ApiService {
             c.setRequestProperty("Content-length", "0");
             c.setUseCaches(false);
             c.setAllowUserInteraction(false);
-            c.setRequestProperty("Authorization","Bearer " + " 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");
+            c.setRequestProperty("Authorization","Bearer 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"); //TODO: Paste here your valid Token
             c.connect();
             int status = c.getResponseCode();
             log.info("Github url: " + url);
@@ -103,7 +104,7 @@ public class ApiService {
         String url = "https://api.github.com/repos/" + username + "/" + repositoryName + "/issues";
         RestTemplate restTemplate = new RestTemplate();
         HttpHeaders headers = new HttpHeaders();
-        headers.add("Authorization","Bearer " + " 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");
+        headers.add("Authorization","Bearer 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"); //TODO: Paste here your valid Token
         HttpEntity<Void> requestEntity = new HttpEntity<>(headers);
         ResponseEntity<List<Issue>> responseEntity =
                 restTemplate.exchange(

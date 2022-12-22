@@ -5,6 +5,7 @@ import {Route, Routes} from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import UsernameComponent from "./components/UsernameComponent";
 import RepositoryComponent from "./components/RepositoryComponent";
+import IssueComponent from "./components/IssueComponent";
 
 const theme = createTheme({
     palette: {
@@ -22,6 +23,7 @@ function App() {
                 <Route path={"/"} element={<HomePage/>}/>
                 <Route path={"/username/:username"} element={<UsernameComponent/>}/>
                 <Route path={"/repository/:username/:repo"} element={<RepositoryComponent/>}/>
+                <Route path={"/issue/:username/:repo/:id"} element={<IssueComponent/>}/>
             </Routes>
         </ThemeProvider>
     );

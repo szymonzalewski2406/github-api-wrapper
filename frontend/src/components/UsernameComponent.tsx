@@ -42,7 +42,7 @@ const UsernameComponent = () => {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json; charset=utf-8',
-                'Authorization': 'Bearer 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'
+                'Authorization': 'Bearer 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' //TODO: Paste your Personal Token here.
             },
         })
             .then(res => {

@@ -29,5 +29,9 @@
   "cancel": "Abbrechen",
   "owner": "Repository Inhaber",
   "watchers": "Anhänger",
-  "no_issues": "Dieses Repository hat keine geöfnete Issues"
+  "no_issues": "Dieses Repository hat keine geöfnete Issues",
+  "title": "Titel",
+  "state": "State",
+  "paste_token": "Versicher sich ob dienen Github Personal Access Token richtig in Code eingeführt ist und ob es aktuell ist!",
+  "learn_more": "Finde mehr über Personal Access Token"
 }

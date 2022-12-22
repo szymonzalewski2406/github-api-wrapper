@@ -27,5 +27,9 @@
   "cancel": "Anuluj",
   "owner": "Właściciel repozytorium",
   "watchers": "Obserwujący",
-  "no_issues": "To repozytorium nie posiada otwartych issues'ów"
+  "no_issues": "To repozytorium nie posiada otwartych issues'ów",
+  "title": "Tytuł",
+  "state": "Stan",
+  "paste_token": "Na początku upewnij sie, że twój Personal Access Token jest odpowiednio wklejony do kodu oraz czy jest on ważny!",
+  "learn_more": "Dowiedz się więcej na temat Personal Access Token"
 }
